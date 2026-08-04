@@ -1,0 +1,14 @@
+# Cloudflare Pages 配置
+# 无需构建，直接部署静态文件
+
+[build]
+command = ""
+upload_dir = "."
+
+[headers]
+# 安全头
+"/*" = [
+  { name = "X-Content-Type-Options", value = "nosniff" },
+  { name = "X-Frame-Options", value = "DENY" },
+  { name = "Referrer-Policy", value = "strict-origin-when-cross-origin" }
+]
