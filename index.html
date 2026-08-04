@@ -270,6 +270,44 @@
             word-break: break-all;
             margin-bottom: var(--space-lg);
             letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            user-select: none;
+        }
+
+        .hero .address:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .hero .address:active {
+            transform: scale(0.98);
+        }
+
+        .copy-toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--accent);
+            color: #000;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-sm);
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 100;
+            font-family: var(--font-sans);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .copy-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
 
         .hero h1 {
@@ -552,7 +590,7 @@
         <!-- ===== Hero ===== -->
         <section class="hero">
             <div class="bitcoin-symbol">₿</div>
-            <div class="address" id="address-display">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</div>
+            <div class="address" id="address-display" title="Click to copy" data-i18n-title="click_copy">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</div>
 
             <h1 data-i18n="title">比特币创世地址</h1>
             <p class="subtitle" data-i18n="subtitle">Bitcoin Genesis Address — 中本聪，2009年1月3日</p>
@@ -969,6 +1007,60 @@
     }
 
     fetchChainData();
+
+    // ===== Click Address to Copy =====
+    const addressEl = document.getElementById('address-display');
+    const toast = document.createElement('div');
+    toast.className = 'copy-toast';
+    toast.id = 'copy-toast';
+    document.body.appendChild(toast);
+
+    const copyMessages = {
+        zh: '地址已复制到剪贴板',
+        en: 'Address copied to clipboard',
+        ja: 'アドレスをコピーしました',
+        ko: '주소가 복사되었습니다',
+        es: 'Dirección copiada al portapapeles',
+        fr: 'Adresse copiée dans le presse-papiers',
+        de: 'Adresse in die Zwischenablage kopiert',
+        ru: 'Адрес скопирован в буфер обмена',
+        pt: 'Endereço copiado para a área de transferência',
+        ar: 'تم نسخ العنوان إلى الحافظة',
+        hi: 'पता क्लिपबोर्ड पर कॉपी हो गया'
+    };
+
+    function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toast._timer);
+        toast._timer = setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    addressEl.addEventListener('click', async () => {
+        const address = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
+        const lang = document.querySelector('.lang-btn.active')?.dataset.lang || 'zh';
+        const msg = copyMessages[lang] || copyMessages.en;
+
+        try {
+            await navigator.clipboard.writeText(address);
+            showToast(msg);
+        } catch (e) {
+            // Fallback for older browsers
+            const textarea = document.createElement('textarea');
+            textarea.value = address;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast(msg);
+            } catch (e2) {
+                showToast('1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa');
+            }
+            document.body.removeChild(textarea);
+        }
+    });
     </script>
 </body>
 </html>
