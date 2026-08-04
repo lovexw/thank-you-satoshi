@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# 优先抓取首页
+Allow: /$
+Allow: /index.html
+
+# 禁止无意义路径
+Disallow: /cdn-cgi/
+
+# Sitemap
+Sitemap: https://1a1zp1ep5qgefi2dmptftl5slmv7divfna.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1

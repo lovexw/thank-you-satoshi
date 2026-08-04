@@ -1,14 +1,31 @@
-# Cloudflare Pages 配置
-# 无需构建，直接部署静态文件
+# Cloudflare Pages 安全头 + 缓存策略
 
-[build]
-command = ""
-upload_dir = "."
-
-[headers]
 # 安全头
-"/*" = [
-  { name = "X-Content-Type-Options", value = "nosniff" },
-  { name = "X-Frame-Options", value = "DENY" },
-  { name = "Referrer-Policy", value = "strict-origin-when-cross-origin" }
-]
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+# HTML 不缓存，确保 SEO 内容实时更新
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# 静态资源长期缓存
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# robots.txt 和 sitemap.xml 短缓存
+/robots.txt
+  Cache-Control: public, max-age=3600
+/sitemap.xml
+  Cache-Control: public, max-age=3600
