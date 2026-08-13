@@ -981,9 +981,10 @@
         const balUsdEl = document.getElementById('balance-usd');
         const txEl = document.getElementById('tx-count');
         const recvEl = document.getElementById('total-received');
+        const withTimeout = ms => AbortSignal.timeout ? { signal: AbortSignal.timeout(ms) } : {};
 
         try {
-            const resp = await fetch(`https://blockchain.info/multiaddr?active=${address}`, { signal: AbortSignal.timeout(8000) });
+            const resp = await fetch(`https://blockchain.info/multiaddr?active=${address}`, withTimeout(8000));
             const data = await resp.json();
             const a = data.addresses[0];
             const totalReceived = a.total_received / 1e8;
@@ -997,7 +998,7 @@
             recvEl.textContent = '≈ ' + totalReceived.toFixed(4) + ' BTC received';
 
             try {
-                const priceResp = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd', { signal: AbortSignal.timeout(8000) });
+                const priceResp = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd', withTimeout(8000));
                 const priceData = await priceResp.json();
                 const usd = (balance * priceData.bitcoin.usd).toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
                 balUsdEl.textContent = '≈ ' + usd;
