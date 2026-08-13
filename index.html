@@ -34,6 +34,7 @@
     <link rel="alternate" hreflang="pt" href="https://1a1zp1ep5qgefi2dmptftl5slmv7divfna.com/">
     <link rel="alternate" hreflang="ar" href="https://1a1zp1ep5qgefi2dmptftl5slmv7divfna.com/">
     <link rel="alternate" hreflang="hi" href="https://1a1zp1ep5qgefi2dmptftl5slmv7divfna.com/">
+    <link rel="alternate" hreflang="vi" href="https://1a1zp1ep5qgefi2dmptftl5slmv7divfna.com/">
     <link rel="alternate" hreflang="x-default" href="https://1a1zp1ep5qgefi2dmptftl5slmv7divfna.com/">
 
     <!-- ===== Open Graph ===== -->
@@ -650,6 +651,7 @@
             <button class="lang-btn" data-lang="pt">Português</button>
             <button class="lang-btn" data-lang="ar">العربية</button>
             <button class="lang-btn" data-lang="hi">हिन्दी</button>
+            <button class="lang-btn" data-lang="vi">Tiếng Việt</button>
         </div>
 
         <!-- ===== Info / SEO Content ===== -->
@@ -897,6 +899,29 @@
                 <p>31 अक्टूबर 2008 को, सातोशी नाकामोटो ने क्रिप्टोग्राफी मेलिंग सूची में बिटकॉइन व्हाइटपेपर "<strong>Bitcoin: A Peer-to-Peer Electronic Cash System</strong>" प्रकाशित किया। यह 9-पृष्ठ का दस्तावेज़ एक विकेंद्रीकृत इलेक्ट्रॉनिक भुगतान प्रणाली का वर्णन करता था जो विश्वसनीय तृतीय पक्षों के बिना पीयर-टू-पीयर मूल्य हस्तांतरण को सक्षम बनाता था।</p>
                 <p>2008.10.31 — हमेशा के लिए</p>
             `
+        },
+        vi: {
+            title: "Địa chỉ Genesis của Bitcoin",
+            subtitle: "Địa chỉ Bitcoin đầu tiên — Satoshi Nakamoto, ngày 3 tháng 1 năm 2009",
+            genesis_translation: "The Times, ngày 3/1/2009: Bộ trưởng Tài chính bên bờ gói cứu trợ thứ hai cho các ngân hàng",
+            live_data: "Dữ liệu on-chain thời gian thực",
+            balance: "Số dư",
+            tx_count: "Số giao dịch",
+            view_blockchain: "Xem trên Blockchain",
+            tribute: "Cảm ơn bạn, Satoshi Nakamoto",
+            info: `
+                <h2>1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa — Địa chỉ Genesis của Bitcoin</h2>
+                <p><strong>1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</strong> là địa chỉ đầu tiên trên blockchain Bitcoin, thuộc về <strong>Satoshi Nakamoto</strong> — người tạo ra Bitcoin dưới bút danh này. Ngày 3/1/2009, Satoshi đào <strong>Genesis Block</strong> (block #0) và nhận phần thưởng 50 BTC gửi về địa chỉ này.</p>
+                <p>Genesis Block chứa một thông điệp nhúng từ tờ The Times: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks." Câu này vừa là bằng chứng mốc thời gian, vừa là lời bình về sự bất ổn của hệ thống tài chính truyền thống.</p>
+                <h2>Dữ liệu on-chain</h2>
+                <p>Ngoài 50 BTC ban đầu — vốn vĩnh viễn không thể tiêu do một đặc điểm trong mã nguồn Bitcoin — hàng nghìn người trên khắp thế giới đã gửi những khoản BTC nhỏ về địa chỉ này để tri ân Satoshi Nakamoto. Địa chỉ đã nhận hàng chục nghìn giao dịch với tổng cộng hơn 100 BTC.</p>
+                <p>Xem số dư thời gian thực và toàn bộ lịch sử giao dịch trên <a href="https://blockchain.info/address/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa" rel="noopener nofollow" target="_blank">Blockchain.com</a>.</p>
+                <h2>Satoshi Nakamoto và whitepaper Bitcoin</h2>
+                <p>Ngày 31/10/2008, Satoshi Nakamoto công bố whitepaper Bitcoin — "<strong>Bitcoin: A Peer-to-Peer Electronic Cash System</strong>" — trên một mailing list về mật mã học. Tài liệu 9 trang này mô tả một hệ thống thanh toán điện tử phi tập trung, cho phép chuyển giá trị ngang hàng mà không cần bên thứ ba đáng tin cậy.</p>
+                <h2>Về địa chỉ Bitcoin</h2>
+                <p>Địa chỉ Bitcoin là định danh dùng để nhận tiền. <strong>1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</strong> là địa chỉ P2PKH (Pay-to-Public-Key-Hash), bắt đầu bằng số "1" và được mã hoá theo chuẩn Base58. Địa chỉ được sinh ra từ public key qua hai lớp hash SHA-256 và RIPEMD-160.</p>
+                <p>2008.10.31 — Mãi mãi</p>
+            `
         }
     };
 
@@ -955,7 +980,7 @@
         });
 
         // Update tribute to match language
-        const tributeMap = { zh: 0, en: 1, ja: 2, ko: 3, es: 4, fr: 5, de: 6, ru: 9, pt: 8, ar: 11, hi: 13 };
+        const tributeMap = { zh: 0, en: 1, ja: 2, ko: 3, es: 4, fr: 5, de: 6, ru: 9, pt: 8, ar: 11, hi: 13, vi: 16 };
         if (tributeMap[lang] !== undefined) {
             tributeIndex = tributeMap[lang];
             tributeEl.textContent = TRIBUTES[tributeIndex];
@@ -1032,7 +1057,8 @@
         ru: 'Адрес скопирован в буфер обмена',
         pt: 'Endereço copiado para a área de transferência',
         ar: 'تم نسخ العنوان إلى الحافظة',
-        hi: 'पता क्लिपबोर्ड पर कॉपी हो गया'
+        hi: 'पता क्लिपबोर्ड पर कॉपी हो गया',
+        vi: 'Đã sao chép địa chỉ vào clipboard'
     };
 
     function showToast(msg) {
